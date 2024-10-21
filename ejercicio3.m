@@ -18,6 +18,7 @@ for i = 2:4
     aprox{i} = aprox{i-1} + val(i)*U(:,i)*V(:,i)';
 end
 
+figure(1)
 for i = 1:4
     subplot(2,3,i);
     surf(xx, yy, aprox{i})
