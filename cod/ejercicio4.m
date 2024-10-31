@@ -1,9 +1,9 @@
 % ejercicio 4
 function c = calculo_aprox(f, n, inf, sup)
     M = zeros(n);
-    b = zeros(n);
+    b = zeros(n,1);
     for i = 1:n
-        b(i) = integral(@(x) f*x^(i-1), inf, sup);
+        b(i) = integral(@(x) f(x).*x.^(i-1), inf, sup);
         for j = 1:n
             M(i,j) = 1/(i+j+1);
         end
@@ -16,4 +16,15 @@ function c = calculo_aprox(f, n, inf, sup)
 end
 
 f = @(x) cos(4.*pi.*x);
-calculo_aprox(f, 10)
+c = calculo_aprox(f, 10, 0, 1);
+p = @(x) polyval(c(end:-1:1), x);
+integral(@(x) f(x) - p(x), 0, 1)
+
+xx = linspace(0,1);
+plot(xx, f(xx), '-')
+hold on
+plot(xx, p(xx), 'b-')
+hold off
+
+
+
