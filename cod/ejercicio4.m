@@ -9,9 +9,7 @@ function c = calculo_aprox(f, n, inf, sup)
         end
     end
     
-    % M tiene rango completo, procedemos por pseudo-inversa
-    inversa = (M'\M)*M';
-    c = inversa*b;
+    c = M\b;
 
 end
 
