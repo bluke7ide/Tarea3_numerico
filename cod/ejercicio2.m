@@ -1,4 +1,3 @@
-
 %% Inciso a
 
 m = 12;
@@ -10,7 +9,7 @@ cond_A = cond(A);
 
 %% Inciso b
 
-[P, L, U] = lu(A);
+[L, U, P] = lu(A);
 y = L \ (P * b);
 x_LU = U \ y;
 
@@ -41,7 +40,7 @@ error_SVD = norm(x - x_SVD, 2);
 %% Inciso g
 
 rango = 9;
-A_nu = U(:, 1:rango) * S(1:rango, 1:rango) * V(:, 1:rango)';
-x_aprox = A_nu \ b;
+A_nu_inv = V(:, 1:rango) * inv(S(1:rango, 1:rango)) * U(:, 1:rango)';
+x_aprox = A_nu_inv * b;
 
 error_approx = norm(x - x_aprox, 2);
