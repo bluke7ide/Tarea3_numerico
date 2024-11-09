@@ -44,4 +44,4 @@ rango = 9;
 A_nu = U(:, 1:rango) * S(1:rango, 1:rango) * V(:, 1:rango)';
 x_aprox = A_nu \ b;
 
-error_approx = norm(x_exact - x_aprox, 2);
+error_approx = norm(x - x_aprox, 2);
