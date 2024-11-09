@@ -125,7 +125,6 @@ grid on;
 %% Inciso e
 
 c0 = [1; 1; 1; 1];
-
 [c, iter, norma_delta_c, num_cond] = minimos_cuadrados(x, y, c0);
 
 disp("Número de iteraciones:");
