@@ -97,21 +97,22 @@ end
 %% Inciso d
 
 m = 20; 
-n = 20;
 A_random = rand(m);
 
 [Q1, R1] = qr1(A_random);
 [Q2, R2] = qr2(A_random);
 [Q3, R3] = qr3(A_random);
 
-error1_A = norm(A_random - Q1 * R1, 2);
-error1_Q = norm(Q1 * Q1' - eye(m), 2);
+error_random = zeros(3,2);
 
-error2_A = norm(A_random - Q2 * R2, 2);
-error2_Q = norm(Q2 * Q2' - eye(m), 2);
+error_random(1,1) = norm(A_random - Q1 * R1, 2);
+error_random(1,2) = norm(Q1 * Q1' - eye(m), 2);
 
-error3_A = norm(A_random - Q3 * R3, 2);
-error3_Q = norm(Q3 * Q3' - eye(m), 2);
+error_random(2,1) = norm(A_random - Q2 * R2, 2);
+error_random(2,2) = norm(Q2 * Q2' - eye(m), 2);
+
+error_random(3,1) = norm(A_random - Q3 * R3, 2);
+error_random(3,2) = norm(Q3 * Q3' - eye(m), 2);
 
 
 %% Inciso e
@@ -122,17 +123,20 @@ A_hilbert = hilb(m);
 [Q2, R2] = qr2(A_hilbert);
 [Q3, R3] = qr3(A_hilbert);
 
-error1_A_hilbert = norm(A_hilbert - Q1 * R1, 2);
-error1_Q_hilbert = norm(Q1 * Q1' - eye(m), 2);
+error_hilbert = zeros(4,2);
 
-error2_A_hilbert = norm(A_hilbert - Q2 * R2, 2);
-error2_Q_hilbert = norm(Q2 * Q2' - eye(m), 2);
+error_hilbert(1,1)  = norm(A_hilbert - Q1 * R1, 2);
+error_hilbert(1,2) = norm(Q1 * Q1' - eye(m), 2);
 
-error3_A_hilbert = norm(A_hilbert - Q3 * R3, 2);
-error3_Q_hilbert = norm(Q3 * Q3' - eye(m), 2);
+error_hilbert(1,2) = norm(A_hilbert - Q2 * R2, 2);
+error_hilbert(2,2)  = norm(Q2 * Q2' - eye(m), 2);
+
+error_hilbert(3,1) = norm(A_hilbert - Q3 * R3, 2);
+error_hilbert(3,2) = norm(Q3 * Q3' - eye(m), 2);
 
 % Comparación con la factorización QR de MATLAB
-[Q_matlab, R_matlab] = qr(A_hilbert);
-error_matlab_A = norm(A_hilbert - Q_matlab * R_matlab, 2);
-error_matlab_Q = norm(Q_matlab * Q_matlab' - eye(m), 2);
+[Q4, R4] = qr(A_hilbert);
+
+error_hilbert(4,1) = norm(A_hilbert - Q4 * R4, 2);
+error_hilbert(4,2) = norm(Q4 * Q4' - eye(m), 2);
 

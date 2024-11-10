@@ -36,7 +36,7 @@ function Jf = jacobiano_f(x, c)
 
     Jf(:, 1) = exp(-c(2) * x) .* sin(c(3) * x + c(4));        
     Jf(:, 2) = -c(1) * x .* exp(-c(2) * x) .* sin(c(3) * x + c(4));    
-    Jf(:, 3) = c(1) * exp(-c(2) * x) .* x .* cos(c(3) * x + c(4));  
+    Jf(:, 3) = c(1) * exp(-c(2) * x) .* x .* cos(c(3) * x + c(4));
     Jf(:, 4) = c(1) * exp(-c(2) * x) .* cos(c(3) * x + c(4));    
 end
 
@@ -53,6 +53,8 @@ function [c, iter, norma_delta_c, num_cond] = minimos_cuadrados(x, y, c0)
     %   Outputs
     %       c: vector de coeficientes ajustados
     %       iter: número de iteraciones requeridas
+    %       norma_delta_c: valor de la norma de delta c por iteración
+    %       num_cond: número de condición por itereción
     
     
     tol = 1e-8;
@@ -63,10 +65,10 @@ function [c, iter, norma_delta_c, num_cond] = minimos_cuadrados(x, y, c0)
     
     while norm(delta_c, inf) > tol
        
-        g = funcion(x, c) - y;
+        dif = y - funcion(x, c);
         J = jacobiano_f(x, c);
         
-        delta_c = -(J' * J) \ (J' * g); 
+        delta_c = (J' * J) \ (J' * dif);
         c = c + delta_c;
 
         iter = iter + 1; 
@@ -91,23 +93,24 @@ disp(c);
 
 % Función exacta
 c_exact = [1; 0.5; 2; 0];
-y_exact = funcion(x, c_exact); 
+xx = linspace(0, 10);
+yy = funcion(xx, c_exact);
 
 % Gráficas
 figure;
 hold on;
-plot(x, y, '.', 'DisplayName', 'Datos (x_i, y_i)', 'MarkerSize', 10);
-plot(x, y_exact, 'r.', 'DisplayName', 'Función Exacta', 'MarkerSize', 10);
-plot(x, funcion(x, c), 'b.', 'DisplayName', 'Aproximación', 'MarkerSize', 10);
+plot(x, y, 'b.', 'DisplayName', 'Datos (x_i, y_i)', 'MarkerSize', 10);
+plot(xx, yy, 'k-', 'DisplayName', 'Función Exacta');
+plot(sort(x), funcion(sort(x), c), 'r--', 'DisplayName', 'Aproximación', 'LineWidth', 1.5);
 legend;
 xlabel('x');
 ylabel('y');
-title('Mínimos cuadrados');
+title('Problema de mínimos cuadrados');
 hold off;
 
 figure;
-plot(1:iter, norma_delta_c, '-o');
-xlabel('k');
+plot(1:iter, norma_delta_c, '.-', 'MarkerSize', 15);
+xlabel('Iteración k');
 ylabel('||\Deltac_k||_\infty');
 title('||\Deltac_k||_\infty en función de k');
 grid on;
@@ -116,16 +119,16 @@ grid on;
 %% Inciso d
 
 figure;
-plot(1:iter, num_cond, '-o');
-xlabel('k');
-ylabel('Número de Condición \kappa(J(c_k))');
-title('Número de Condición en función de k');
+plot(1:iter, num_cond, '.-', 'MarkerSize', 15);
+xlabel('Iteración k');
+ylabel('\kappa(J(c_k))');
+title('Número de condición en función de k');
 grid on;
 
 %% Inciso e
 
 c0 = [1; 1; 1; 1];
-[c, iter, norma_delta_c, num_cond] = minimos_cuadrados(x, y, c0);
+[c, iter] = minimos_cuadrados(x, y, c0);
 
 disp("Número de iteraciones:");
 disp(iter);
