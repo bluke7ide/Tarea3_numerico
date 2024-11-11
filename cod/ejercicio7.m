@@ -99,20 +99,20 @@ yy = funcion(xx, c_exact);
 % Gráficas
 figure;
 hold on;
-plot(x, y, 'b.', 'DisplayName', 'Datos (x_i, y_i)', 'MarkerSize', 10);
-plot(xx, yy, 'k-', 'DisplayName', 'Función Exacta');
-plot(sort(x), funcion(sort(x), c), 'r--', 'DisplayName', 'Aproximación', 'LineWidth', 1.5);
+plot(x, y, 'b.', 'DisplayName', 'Datos', 'MarkerSize', 10);
+plot(xx, yy, 'k-', 'DisplayName', 'Funcion exacta');
+plot(sort(x), funcion(sort(x), c), 'r--', 'DisplayName', 'Aproximacion', 'LineWidth', 1.5);
 legend;
 xlabel('x');
 ylabel('y');
-title('Problema de mínimos cuadrados');
+title('Aproximacion por minimos cuadrados');
 hold off;
 
 figure;
 plot(1:iter, norma_delta_c, '.-', 'MarkerSize', 15);
-xlabel('Iteración k');
+xlabel('Iteracion k');
 ylabel('||\Deltac_k||_\infty');
-title('||\Deltac_k||_\infty en función de k');
+title('||\Deltac_k||_\infty en funcion de k');
 grid on;
 
 
@@ -120,9 +120,9 @@ grid on;
 
 figure;
 plot(1:iter, num_cond, '.-', 'MarkerSize', 15);
-xlabel('Iteración k');
-ylabel('\kappa(J(c_k))');
-title('Número de condición en función de k');
+xlabel('Iteracion k');
+ylabel('Numero de condicion');
+title('Numero de condicion en funcion de k');
 grid on;
 
 %% Inciso e

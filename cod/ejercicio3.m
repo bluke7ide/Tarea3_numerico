@@ -10,7 +10,7 @@ shading interp
 xlabel('xx')
 ylabel('yy')
 zlabel('f(x,y)')
-title('Gráfica de superficie de f(x, y)')
+title('Grafica de superficie de f(x, y)')
 
 zz = f(xx,yy);
 [U,S,V] = svd(zz);

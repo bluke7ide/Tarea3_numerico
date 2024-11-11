@@ -67,42 +67,42 @@ end
 figure;
 xx = linspace(0,1);
 yy = arrayfun(@(x) s2(sigmas, x, xn, yn), xx);
-plot(xx, f(xx),'', 'DisplayName', 'f(x) = cos(2\pi x)')
+plot(xx, f(xx),'', 'DisplayName', 'f(x)')
 hold on;
-plot(xx, yy, 'r--', 'DisplayName', 'Aproximación s2')
+plot(xx, yy, 'r--', 'DisplayName', 'Aproximacion')
 hold off;
 legend;
-title('Aproximación s2 usando nodos arbitrarios');
+title('Aproximacion s2 usando nodos arbitrarios');
 xlabel('x');
-ylabel('Valor de la función');
+ylabel('Valor de la funcion');
 
 figure;
 plot(xx, abs(f(xx) - yy))
 disp(max(abs(f(xx) - yy)))
-title('Error s2 de cos(2\pi x) usando nodos arbitrarios');
+title('Error usando nodos arbitrarios');
 xlabel('x');
-ylabel('Valor de la función');
+ylabel('Error');
 
 xn = linspace(0,1,m+1);
 yn = f(xn);
 sigmas = calculo_s2(xn, yn);
 yy = arrayfun(@(x) s2(sigmas, x, xn, yn), xx);
 figure;
-plot(xx, f(xx),'', 'DisplayName', 'f(x) = cos(2\pi x)')
+plot(xx, f(xx),'', 'DisplayName', 'f(x)')
 hold on;
-plot(xx, yy, 'r--', 'DisplayName', 'Aproximación s2')
+plot(xx, yy, 'r--', 'DisplayName', 'Aproximacion')
 hold off;
 legend;
-title('Aproximación s2 usando nodos equisdistantes');
+title('Aproximacion s2 usando nodos equisdistantes');
 xlabel('x');
-ylabel('Valor de la función');
+ylabel('Valor de la funcion');
 
 figure;
 plot(xx, abs(f(xx) - yy))
 disp(max(abs(f(xx) - yy)))
-title('Error s2 de cos(2\pi x) usando nodos equisdistantes');
+title('Error usando nodos equisdistantes');
 xlabel('x');
-ylabel('Valor de la función');
+ylabel('Error');
 
 function s2 = der_s2(sigmas, x, xn)
     %
@@ -135,18 +135,18 @@ end
 derf = @(x) -2.*pi.*sin(2.*pi.*x);
 yy = arrayfun(@(x) der_s2(sigmas, x, xn), xx);
 figure;
-plot(xx, derf(xx),'', 'DisplayName', 'derf(x) = -2\pi sin(2\pi x)')
+plot(xx, derf(xx),'', 'DisplayName', 'derf(x)')
 hold on;
-plot(xx, yy, 'r--', 'DisplayName', 'Aproximación der_s2')
+plot(xx, yy, 'r--', 'DisplayName', 'Aproximacion')
 hold off;
 legend;
 title('Derivada s2 aproximada usando nodos equisdistantes');
 xlabel('x');
-ylabel('Valor de la función');
+ylabel('Valor de la funcion');
 
 figure;
 plot(xx, abs(derf(xx) - yy))
 disp(max(abs(derf(xx) - yy)))
-title('Error derivada s2 aprox de cos(2\pi x) usando nodos equisdistantes');
+title('Error derivada s2 aprox usando nodos equisdistantes');
 xlabel('x');
-ylabel('Valor de la función');
+ylabel('Error');
