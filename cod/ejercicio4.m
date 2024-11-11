@@ -27,14 +27,14 @@ p = @(x) polyval(c(end:-1:1), x);
 integral(@(x) (f(x) - p(x)).^2, 0, 1)
 xx = linspace(0,1); 
 figure;
-plot(xx, f(xx), '-', 'DisplayName', 'f(x) = cos(4\pi x)')
+plot(xx, f(xx), '-', 'DisplayName', 'f(x)')
 hold on
-plot(xx, p(xx), 'r--', 'DisplayName', 'Aproximación p(x)')
+plot(xx, p(xx), 'r--', 'DisplayName', 'Aproximacion')
 hold off
 legend;
-title('Aproximación de f(x) = cos(4\pi x) usando derivadas');
+title('Aproximacion de f(x) usando derivadas');
 xlabel('x');
-ylabel('Valor de la función');
+ylabel('Valor de la funcion');
 
 function p = aprox_leg(n, f)
     %
@@ -74,14 +74,14 @@ p = aprox_leg(n, f);
 
 figure;
 xx = linspace(0, 1, 100); 
-plot(xx, f(xx), '-', 'DisplayName', 'f(x) = cos(4\pi x)'); 
+plot(xx, f(xx), '-', 'DisplayName', 'f(x)'); 
 hold on;
-plot(xx, arrayfun(p, xx), 'r--', 'DisplayName', 'Aproximación p(x)');
+plot(xx, arrayfun(p, xx), 'r--', 'DisplayName', 'Aproximacion');
 hold off;
 legend;
-title('Aproximación de f(x) = cos(4\pi x) usando polinomios de Legendre');
+title('Aproximacion de f(x) usando polinomios de Legendre');
 xlabel('x');
-ylabel('Valor de la función');
+ylabel('Valor de la funcion');
 
 norma_error = integral(@(x) (f(x) - arrayfun(p, x)).^2, 0, 1);
 disp(['Norma del error: ', num2str(norma_error)]);
